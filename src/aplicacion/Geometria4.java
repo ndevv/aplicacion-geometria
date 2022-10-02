@@ -1,8 +1,6 @@
 package aplicacion;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -12,9 +10,17 @@ import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 import javax.swing.JLabel;
 import java.awt.Font;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
+/**
+*
+* @author neodev
+*/
 public class Geometria4 extends JFrame {
 
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
 	/**
@@ -40,13 +46,13 @@ public class Geometria4 extends JFrame {
 		setResizable(false);
 		setTitle(Geometria.nombre+" - Resultados");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 621, 388);
+		setBounds(100, 100, 621, 456);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.DARK_GRAY);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+		setLocationRelativeTo(null);
 	
 		JTextPane txtpnResultadoPuntos = new JTextPane();
 		txtpnResultadoPuntos.setFont(new Font("Dialog", Font.BOLD, 24));
@@ -54,7 +60,7 @@ public class Geometria4 extends JFrame {
 		txtpnResultadoPuntos.setForeground(Color.CYAN);
 		txtpnResultadoPuntos.setBackground(new Color(0, 0, 0, 0));
 		txtpnResultadoPuntos.setText("RESULTADO: "+Geometria3.puntaje+" PUNTOS");
-		txtpnResultadoPuntos.setBounds(151, 82, 320, 35);
+		txtpnResultadoPuntos.setBounds(134, 83, 376, 35);
 		contentPane.add(txtpnResultadoPuntos);
 		
 		JLabel label = new JLabel("");
@@ -63,12 +69,30 @@ public class Geometria4 extends JFrame {
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		if (Geometria3.puntaje >= 5) {
-			label.setIcon(new ImageIcon("src/img/youwin.gif"));
+			label.setIcon(new ImageIcon("img/youwin.gif"));
 		}else {
-			label.setIcon(new ImageIcon("src/img/youlose.gif"));
+			label.setIcon(new ImageIcon("img/youlose.gif"));
 		}
 		
-		label.setBounds(0, -13, 621, 369);
+		JButton btnNuevoIntento = new JButton("Nuevo Intento");
+		btnNuevoIntento.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Geometria ventana1 = new Geometria();
+				ventana1.setVisible(true);
+				dispose();
+			}
+		});
+		
+		JLabel lblCop4 = new JLabel("neodev©");
+		lblCop4.setBounds(0, 404, 70, 15);
+		contentPane.add(lblCop4);
+		btnNuevoIntento.setToolTipText("Vuelve a la página principal");
+		btnNuevoIntento.setForeground(Color.ORANGE);
+		btnNuevoIntento.setBackground(Color.DARK_GRAY);
+		btnNuevoIntento.setBounds(235, 399, 160, 25);
+		contentPane.add(btnNuevoIntento);
+		
+		label.setBounds(0, -13, 621, 437);
 		contentPane.add(label);
 	}
 }

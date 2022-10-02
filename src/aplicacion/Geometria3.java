@@ -1,6 +1,5 @@
 package aplicacion;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.util.Random; //
 import javax.swing.ButtonGroup; //
@@ -8,20 +7,21 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
-import javax.swing.JTextArea;
+import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 import java.awt.Color;
 import javax.swing.JTextPane;
-import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JCheckBox;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
+/**
+*
+* @author neodev
+*/
 public class Geometria3 extends JFrame {
 
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private ButtonGroup bg1 = new ButtonGroup(); // ButtonGroup RadioButton
 	private ButtonGroup bg2 = new ButtonGroup();
@@ -46,6 +46,7 @@ public class Geometria3 extends JFrame {
 				try {
 					Geometria3 frame = new Geometria3();
 					frame.setVisible(true);
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -108,15 +109,8 @@ public class Geometria3 extends JFrame {
 		setTitle(Geometria.nombre+" - Test V o F");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 621, 388);
+		setLocationRelativeTo(null);
 		contentPane = new JPanel();
-		contentPane.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent e) {
-				if(e.getKeyCode()==KeyEvent.VK_ENTER) {
-					System.out.println("juas");
-				}
-			}
-		});
 		contentPane.setBackground(Color.DARK_GRAY);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -281,6 +275,24 @@ public class Geometria3 extends JFrame {
 		bg5.add(rdbtnV5);
 		bg5.add(rdbtnF5);
 		
+		JLabel lblCop3 = new JLabel("neodev©");
+		lblCop3.setBounds(12, 329, 70, 15);
+		contentPane.add(lblCop3);
+		
+		JButton btnAtras2 = new JButton("<");
+		btnAtras2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Geometria2 ventana2 = new Geometria2();
+				ventana2.setVisible(true);
+				dispose();
+			}
+		});
+		btnAtras2.setToolTipText("Volver");
+		btnAtras2.setForeground(Color.ORANGE);
+		btnAtras2.setBackground(Color.DARK_GRAY);
+		btnAtras2.setBounds(396, 327, 44, 25);
+		contentPane.add(btnAtras2);
+		
 		
 		JButton btnVerResultado = new JButton("Ver resultado -->");
 		
@@ -323,6 +335,8 @@ public class Geometria3 extends JFrame {
 					Geometria4 ventana4 = new Geometria4();
 					ventana4.setVisible(true);
 					dispose();
+				}else {
+					JOptionPane.showMessageDialog(null, "Error - Debes completar todo el verdadero o falso");
 				}
 				
 			}

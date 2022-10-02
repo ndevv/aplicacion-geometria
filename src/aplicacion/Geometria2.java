@@ -1,6 +1,5 @@
 package aplicacion;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -10,23 +9,24 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
-import javax.swing.JTextPane;
-import javax.swing.JScrollPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.Toolkit;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
 import javax.swing.JLabel;
 import java.awt.Font;
-//FONDO
-import java.awt.Graphics; //Para agregar fondo
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 import java.awt.Color;
 
+/**
+*
+* @author neodev
+*/
 public class Geometria2 extends JFrame {
 	
+	private static final long serialVersionUID = 1L;
+
 	private JPanel contentPane;
 	
 	boolean ready = false;
@@ -41,6 +41,7 @@ public class Geometria2 extends JFrame {
 				try {
 					Geometria2 frame = new Geometria2();
 					frame.setVisible(true);
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -53,13 +54,11 @@ public class Geometria2 extends JFrame {
 	 */
 
 	public Geometria2() {
-		//Geometria.nombre = nombre;
 		setResizable(false);
-		setIconImage(Toolkit.getDefaultToolkit()
-				.getImage("/home/ddev/Documentos/eclipse-workspace/Geometria/img/sacred-geometry-two.png"));
 		setTitle(Geometria.nombre+" - Definiciones");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 621, 388);
+		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.DARK_GRAY);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -75,12 +74,12 @@ public class Geometria2 extends JFrame {
 		txtrDefinicion.setBounds(40, 245, 539, 78);
 		contentPane.add(txtrDefinicion);
 		
-		JComboBox comboBox = new JComboBox();
+		JComboBox<String> comboBox = new JComboBox<String>();
 		comboBox.setBounds(229, 68, 156, 24);
-		//comboBox.setBackground(new Color(0, 0, 0, 64)); //
 		comboBox.setToolTipText("");
 		
-		comboBox.setModel(new DefaultComboBoxModel(new String[] { "Buscar definición", "Isometría", "Simetría Axial",
+		comboBox.setModel(
+				new DefaultComboBoxModel<String>(new String[] { "Buscar definición", "Isometría", "Simetría Axial",
 				"Simetría Central", "Rotación", "Traslación", "Antitraslación", "Isometría Directa",
 				"Isometría Indirecta", "Isometría Involutiva", "Punto Unido", "Figura Unida", "Figura Doble" }));
 		contentPane.add(comboBox);
@@ -89,11 +88,15 @@ public class Geometria2 extends JFrame {
 			public void itemStateChanged(ItemEvent arg0) {
 				// Item
 				String opcion = (String) comboBox.getSelectedItem();
-				// guarda el item seleccionado en opcion para usarlo luego
 
 				if (opcion.equals("Buscar definición")) {
 
 					txtrDefinicion.setText("");
+					
+				}
+				if (!opcion.equals("Buscar definición")) {
+
+					txtrDefinicion.setForeground(Color.ORANGE);
 					
 				}
 				if (opcion.equals("Isometría")) {
@@ -167,9 +170,30 @@ public class Geometria2 extends JFrame {
 					Geometria3 ventana3 = new Geometria3();
 					ventana3.setVisible(true);
 					dispose();
+				}else {
+					txtrDefinicion.setForeground(Color.RED);
+					txtrDefinicion.setText("ANTES DE CONTINUAR DEBES LEER LAS DEFINICIONES !!!");
 				}
 			}
 		});
+		
+		JButton btnAtras = new JButton("<");
+		btnAtras.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Geometria ventana1 = new Geometria();
+				ventana1.setVisible(true);
+				dispose();
+			}
+		});
+		
+		JLabel lblCop2 = new JLabel("neodev©");
+		lblCop2.setBounds(12, 329, 70, 15);
+		contentPane.add(lblCop2);
+		btnAtras.setToolTipText("Vover");
+		btnAtras.setForeground(Color.ORANGE);
+		btnAtras.setBackground(Color.DARK_GRAY);
+		btnAtras.setBounds(190, 331, 44, 25);
+		contentPane.add(btnAtras);
 		btnRealizarPrueba.setForeground(Color.ORANGE);
 		btnRealizarPrueba.setBackground(Color.DARK_GRAY);
 		btnRealizarPrueba.setBounds(246, 331, 156, 25);
@@ -179,14 +203,9 @@ public class Geometria2 extends JFrame {
 		
 		JLabel label = new JLabel("");
 		label.setHorizontalAlignment(SwingConstants.CENTER);
-		label.setIcon(new ImageIcon("src/img/senkuchrome.gif"));
+		label.setIcon(new ImageIcon("img/senkuchrome.gif"));
 		label.setBounds(0, -13, 621, 369);
 		contentPane.add(label);
-		
-//		JLabel lblPrueba = new JLabel("Prueba");
-//		lblPrueba.setHorizontalAlignment(SwingConstants.CENTER);
-//		lblPrueba.setBounds(263, 292, 70, 15);
-//		contentPane.add(lblPrueba);
 
 	}
 }
